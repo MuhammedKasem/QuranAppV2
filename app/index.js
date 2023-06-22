@@ -4,7 +4,7 @@ const StartPage = () => {
     const router = useRouter();
 
     return (
-       <Redirect href="/Home"/>
+       <Redirect href="./(tabs)/Home"/>
     )
 }
 

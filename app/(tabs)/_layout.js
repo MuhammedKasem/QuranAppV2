@@ -29,7 +29,12 @@ export default () => {
             <Tabs.Screen name="Home" options={{
                 headerShown: false
             }} />
-            <Tabs.Screen name="Quran"/>
+            <Tabs.Screen name="Quran" options={{
+                headerShown: false
+            }} />
+            <Tabs.Screen name="Settings" options={{
+                headerShown: false
+            }} />
         </Tabs>
     )
 }
