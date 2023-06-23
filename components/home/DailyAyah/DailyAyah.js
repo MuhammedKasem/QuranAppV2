@@ -1,15 +1,37 @@
 import { TouchableOpacity, ActivityIndicator, Text, View} from 'react-native';
 import styles from './DailyAyah.style';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import useFetch from '../../../hook/useFetch'
 import {COLORS} from '../../../constants';
 import {Ionicons} from "@expo/vector-icons";
+import { Audio } from 'expo-av';
+
 
 const DailyAyah = () => {
 
     const [randNumber, setRandNumber] = useState(Math.floor(Math.random() * 6236) + 1);
     const {data, error, isLoading} = useFetch(`ayah/${randNumber}/en.sahih`);
     const {data: secondData, error: secondError, isLoading: secondIsLoading} = useFetch(`ayah/${randNumber}`);
+    const [sound, setSound] = useState(null);
+
+    const playSound = async () => {
+        const { sound } = await Audio.Sound.createAsync(
+            { uri: `https://cdn.islamic.network/quran/audio/128/ar.mahermuaiqly/${randNumber}.mp3` }
+        );
+        setSound(sound);
+
+        await sound.playAsync();
+    }
+
+    useEffect(() => {
+        return sound
+            ? () => {
+                sound.unloadAsync();
+            }
+            : undefined;
+    }, [sound]);
+
+
 
     const refreshBtn = () => {
         setRandNumber(Math.floor(Math.random() * 6236) + 1)
@@ -39,7 +61,7 @@ const DailyAyah = () => {
 
             )}
             <View style={styles.footer}>
-                <TouchableOpacity style={styles.playBtn}>
+                <TouchableOpacity style={styles.playBtn} onPress={playSound}>
                     <Text style={styles.playBtnTxt}>Play Audio</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.refreshBtn} onPress={refreshBtn}>
