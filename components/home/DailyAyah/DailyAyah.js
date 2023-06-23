@@ -13,6 +13,20 @@ const DailyAyah = () => {
     const {data, error, isLoading} = useFetch(`ayah/${randNumber}/en.sahih`);
     const {data: secondData, error: secondError, isLoading: secondIsLoading} = useFetch(`ayah/${randNumber}`);
     const [sound, setSound] = useState(null);
+    const arabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+    let ayahNumberArabic = '';
+
+    const toArabicNumerals = (number) => {
+        return [...number.toString()].map(digit => arabicNumerals[digit]).join('');
+    }
+
+    if (data && data.surah && data.surah.number) {
+        ayahNumberArabic = toArabicNumerals(data.numberInSurah);
+    }
+
+
+    console.log(data)
+    console.log(secondData)
 
     const playSound = async () => {
         const { sound } = await Audio.Sound.createAsync(
@@ -54,8 +68,9 @@ const DailyAyah = () => {
                         <Text
                             style={styles.arabicName}>{secondData?.surah.name || 'Loading...'}</Text>
                     </View>
-                    <Text
-                        style={styles.arabicTxt}>{secondData?.text || 'Loading...'} </Text>
+                    <Text style={styles.arabicTxt}>
+                        {`(${ayahNumberArabic}) ${secondData?.text || 'Loading...'}`}
+                    </Text>
                     <Text style={styles.engTranslation}>{`${data.numberInSurah}. ${data.text}`}</Text>
                 </View>
 
