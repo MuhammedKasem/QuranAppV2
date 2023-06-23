@@ -4,11 +4,12 @@ import {COLORS, FONT, SHADOWS, SIZES} from "../../../constants";
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "column",
-        padding: SIZES.medium,
+        width: "100%",
+        padding: SIZES.small,
+        gap: 10,
         borderRadius: SIZES.small,
         backgroundColor: "#FFF",
         ...SHADOWS.medium,
@@ -16,7 +17,9 @@ const styles = StyleSheet.create({
     },
     surahNameContainer: {
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        borderColor: COLORS.gray,
+        borderBottomWidth: 2,
     },
     surahName: {
         fontFamily: FONT.bold,
@@ -29,7 +32,6 @@ const styles = StyleSheet.create({
         fontFamily: FONT.kitabBold,
         fontSize: SIZES.xLarge,
         color: COLORS.primary,
-        alignSelf: "center"
     },
     engTranslation: {
         fontFamily: FONT.regular,
@@ -38,7 +40,8 @@ const styles = StyleSheet.create({
     },
     arabicTxt: {
         fontSize: SIZES.xLarge,
-        fontFamily: FONT.kitabBold
+        fontFamily: FONT.kitabBold,
+        textAlign: "right"
     },
     cardNameContainer: {
         borderRadius: SIZES.medium,
@@ -50,7 +53,6 @@ const styles = StyleSheet.create({
         height: "70%",
     },
     textContainer: {
-        flex: 1,
         marginHorizontal: SIZES.medium,
         gap: 10,
     },
@@ -66,6 +68,37 @@ const styles = StyleSheet.create({
         marginTop: 3,
         textTransform: "capitalize",
     },
+    footer: {
+        flexDirection: "row",
+        padding: SIZES.small,
+        backgroundColor: "#FFF",
+        justifyContent: "space-between",
+        gap: 10
+    },
+    refreshBtn: {
+        width: 55,
+        height: 55,
+        borderWidth: 1,
+        borderColor: "#F37453",
+        borderRadius: SIZES.medium,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    playBtn: {
+        flex: 1,
+        height: 55,
+        backgroundColor: "#FE7654",
+        justifyContent: "center",
+        alignItems: "center",
+        marginLeft: SIZES.medium,
+        borderRadius: SIZES.medium,
+    },
+    playBtnTxt: {
+      fontSize: SIZES.medium,
+    color: COLORS.secondary,
+    fontFamily: FONT.bold,
+    }
+
 });
 
 export default styles;
