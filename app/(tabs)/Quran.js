@@ -1,8 +1,9 @@
 import { View, Text } from 'react-native';
+import QuranList from "../../components/quran/QuranList/QuranList";
 
 const Quran = () => {
     return (
-        <Text>Quran Reader</Text>
+        <QuranList/>
     )
 }
 
