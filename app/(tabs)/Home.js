@@ -9,7 +9,7 @@ import Welcome from "../../components/home/Welcome/Welcome";
 const Home = () => {
     const router = useRouter();
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite}}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.black}}>
             <View style={{
                 flex: 1,
                 padding: SIZES.medium

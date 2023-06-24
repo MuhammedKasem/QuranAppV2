@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import { useFonts} from "expo-font";
 import * as SplashScreen from 'expo-splash-screen';
 import ScreenHeaderBtn from "../components/home/Buttons/ScreenHeaderBtn";
+import { Ionicons } from '@expo/vector-icons';
 
 import { COLORS, icons, images, SIZES} from '../constants';
 
@@ -27,19 +28,19 @@ const Layout = () => {
     return (
       <Stack onLayout={onLayoutRootView}>
           <Stack.Screen name="(tabs)" options={{
-                    headerStyle: { backgroundColor: COLORS.lightWhite },
+                    headerStyle: { backgroundColor: COLORS.black },
                     headerShadowVisible: false,
                     headerTitle: "",
                     headerLeft: () => (
                         <ScreenHeaderBtn
-                            iconUrl={icons.menu}
-                            dimensions="60%"
+                            iconName="menu-outline"
+                            color={COLORS.lightWhite}
                         />
                     ),
                     headerRight: () => (
                         <ScreenHeaderBtn
-                            iconUrl={images.profile}
-                            dimensions="100%"
+                            iconName="mail-outline"
+                            color={COLORS.lightWhite}
                         />
                     ),
                 }} />

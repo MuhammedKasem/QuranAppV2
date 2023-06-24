@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: SIZES.medium,
     borderRadius: SIZES.small,
-    backgroundColor: "#FFF",
+    backgroundColor: COLORS.lightGray,
     ...SHADOWS.medium,
     shadowColor: COLORS.white,
     },
@@ -25,14 +25,15 @@ const styles = StyleSheet.create({
         color: COLORS.green
     },
     englishName: {
-         fontFamily: FONT.medium,
-        fontSize: SIZES.medium,
+         fontFamily: FONT.bold,
+        fontSize: SIZES.large,
         color: COLORS.green
     },
     englishTranslation: {
-        fontFamily: FONT.medium,
+        fontFamily: FONT.bold,
         fontSize: SIZES.medium,
-        color: COLORS.secondary
+        color: COLORS.lightWhite,
+        marginBottom: 20
     },
     arabicName: {
          fontFamily: FONT.kitabBold,

@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         padding: SIZES.small,
         gap: 10,
         borderRadius: SIZES.small,
-        backgroundColor: "#FFF",
+        backgroundColor: COLORS.lightGray,
         ...SHADOWS.medium,
         shadowColor: COLORS.white,
     },
@@ -36,12 +36,13 @@ const styles = StyleSheet.create({
     engTranslation: {
         fontFamily: FONT.regular,
         fontSize: SIZES.medium,
-        color: COLORS.secondary
+        color: COLORS.lightWhite
     },
     arabicTxt: {
         fontSize: SIZES.xLarge,
         fontFamily: FONT.kitabBold,
-        textAlign: "right"
+        textAlign: "right",
+        color: COLORS.lightWhite
     },
     cardNameContainer: {
         borderRadius: SIZES.medium,
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
     footer: {
         flexDirection: "row",
         padding: SIZES.small,
-        backgroundColor: "#FFF",
+        backgroundColor: COLORS.lightGray,
         justifyContent: "space-between",
         gap: 10
     },

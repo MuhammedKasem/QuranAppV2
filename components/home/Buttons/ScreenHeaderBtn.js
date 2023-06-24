@@ -2,15 +2,14 @@ import React from 'react'
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 
 import styles from './ScreenHeaderBtn.style'
+import {Ionicons} from "@expo/vector-icons";
 
-const ScreenHeaderBtn = ( {iconUrl, dimensions, handlePress }) => {
+const ScreenHeaderBtn = ( {iconName,  color, handlePress }) => {
+
+    let dimensions = 35;
     return (
         <TouchableOpacity style={styles.btnContainer}>
-            <Image
-                source={iconUrl}
-                resizeMode="cover"
-                style={styles.btnImg(dimensions)}
-            />
+            <Ionicons name={iconName} size={dimensions} color={color} />
         </TouchableOpacity>
     )
 }

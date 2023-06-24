@@ -2,6 +2,7 @@ import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
 import { COLORS, icons, images, SIZES} from './../../constants';
+import {BlurView} from "expo-blur";
 
 export default () => {
     return (
@@ -27,6 +28,8 @@ export default () => {
                 },
                 tabBarActiveTintColor: '#1ed760',
                 tabBarInactiveTintColor: 'gray',
+                tabBarStyle: { backgroundColor: COLORS.lightGray}
+
             })}
         >
             <Tabs.Screen

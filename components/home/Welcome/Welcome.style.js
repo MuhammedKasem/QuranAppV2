@@ -5,16 +5,17 @@ import { COLORS, FONT, SIZES } from "../../../constants";
 const styles = StyleSheet.create({
     container: {
         width: "100%",
+        marginBottom: 15
     },
     greeting: {
         fontFamily: FONT.regular,
         fontSize: SIZES.large,
-        color: COLORS.secondary,
+        color: COLORS.lightWhite,
     },
     welcomeMessage: {
         fontFamily: FONT.bold,
         fontSize: SIZES.xLarge,
-        color: COLORS.primary,
+        color: COLORS.lightWhite,
         marginTop: 2,
     },
     searchContainer: {

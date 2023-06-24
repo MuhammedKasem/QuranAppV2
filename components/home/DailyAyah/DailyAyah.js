@@ -80,7 +80,7 @@ const DailyAyah = () => {
                     <Text style={styles.playBtnTxt}>Play Audio</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.refreshBtn} onPress={refreshBtn}>
-                    <Ionicons name="refresh" size={30} color={COLORS.black}/>
+                    <Ionicons name="refresh" size={30} color={COLORS.lightWhite}/>
                 </TouchableOpacity>
             </View>
 

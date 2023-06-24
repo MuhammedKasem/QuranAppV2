@@ -1,9 +1,18 @@
-import { View, Text } from 'react-native';
+import { View, Text, SafeAreaView } from 'react-native';
 import QuranList from "../../components/quran/QuranList/QuranList";
+
+import { COLORS, SIZES} from "../../constants";
 
 const Quran = () => {
     return (
-        <QuranList/>
+        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.black}}>
+            <View style={{
+                flex: 1,
+                padding: SIZES.medium
+            }}>
+            <QuranList/>
+            </View>
+        </SafeAreaView>
     )
 }
 
