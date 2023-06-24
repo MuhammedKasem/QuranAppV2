@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         width: 55,
         height: 55,
         borderWidth: 1,
-        borderColor: COLORS.secondary,
+        borderColor: COLORS.green,
         borderRadius: SIZES.medium,
         justifyContent: "center",
         alignItems: "center",
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     playBtn: {
         flex: 1,
         height: 55,
-        backgroundColor: COLORS.primary,
+        backgroundColor: COLORS.green,
         justifyContent: "center",
         alignItems: "center",
         marginLeft: SIZES.medium,
