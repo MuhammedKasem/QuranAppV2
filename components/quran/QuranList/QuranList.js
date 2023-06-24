@@ -1,9 +1,10 @@
-import { View, Text, FlatList} from 'react-native';
+import { View, Text, FlatList, TouchableOpacity} from 'react-native';
 import englishChapters from '../../../data/englishChapters.json';
-
+import {useRouter} from "expo-router";
 import styles from '../QuranList/QuranList.style'
 
 const QuranList = () => {
+    const router = useRouter();
 
      const arabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
 
@@ -11,8 +12,13 @@ const QuranList = () => {
         return [...number.toString()].map(digit => arabicNumerals[digit]).join('');
     }
 
+    const handleSurahPress = (surah) => {
+        router.push(`/Surah/${surah.id}`)
+    }
+
 
     const renderItem = ({ item: surah }) => (
+        <TouchableOpacity onPress={() => {handleSurahPress(surah)}}>
         <View style={styles.surah}>
         <View style={styles.surahName}>
             <Text style={styles.englishName}>
@@ -26,6 +32,7 @@ const QuranList = () => {
                 <Text style={styles.englishTranslation}>{surah.translation}</Text>
             </View>
         </View>
+        </TouchableOpacity>
     );
     return (
         <View style={styles.container}>
