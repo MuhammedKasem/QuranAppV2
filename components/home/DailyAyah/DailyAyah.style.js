@@ -24,14 +24,14 @@ const styles = StyleSheet.create({
     surahName: {
         fontFamily: FONT.bold,
         fontSize: SIZES.large,
-        color: COLORS.primary,
+        color: COLORS.green,
         alignSelf: "center"
 
     },
     arabicName: {
         fontFamily: FONT.kitabBold,
         fontSize: SIZES.xLarge,
-        color: COLORS.primary,
+        color: COLORS.green,
     },
     engTranslation: {
         fontFamily: FONT.regular,
