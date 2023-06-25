@@ -35,7 +35,10 @@ const QuranList = () => {
     );
     return (
         <View style={styles.container}>
-            <FlatList data={englishChapters} renderItem={renderItem} keyExtractor={(item) => item.id.toString()}/>
+            <FlatList data={englishChapters}
+                      renderItem={renderItem}
+                      showsVerticalScrollIndicator={false}
+                      keyExtractor={(item) => item.id.toString()}/>
         </View>
     )
 }

@@ -5,6 +5,14 @@
       "bundler": "metro"
     },
     "name": "QuranAppV2",
-    "slug": "QuranAppV2"
+    "slug": "QuranAppV2",
+    "extra": {
+      "eas": {
+        "projectId": "aa8cfa1e-262c-4bb0-9f2a-797d3f7d5437"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "com.wryskie.QuranAppV2"
+    }
   }
 }

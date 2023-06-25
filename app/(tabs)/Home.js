@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, SafeAreaView } from 'react-native';
+import { View, Text, ActivityIndicator, ScrollView, SafeAreaView } from 'react-native';
 import {useEffect, useState} from 'react';
 import { Stack, useRouter } from 'expo-router';
 import { COLORS, icons, images, SIZES} from '../../constants';
@@ -76,7 +76,11 @@ const Home = () => {
             }}>
                 <Welcome/>
                 <DailyAyah/>
-                <CurrentPrayer prayerName={prayerName} prayerTimes={prayerTimes} date={date} sunnahTimes={sunnahTimes} userTimezone={userTimezone} />
+                {prayerTimes ?
+                    <CurrentPrayer prayerName={prayerName} prayerTimes={prayerTimes} date={date}
+                                   sunnahTimes={sunnahTimes} userTimezone={userTimezone}/> :
+                    <ActivityIndicator size='large' color={COLORS.primary}/>
+                }
             </View>
             </ScrollView>
         </SafeAreaView>
