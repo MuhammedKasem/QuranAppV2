@@ -54,9 +54,6 @@ const DailyAyah = () => {
 
     return (
         <View style={styles.container}>
-            {/*<View style={styles.cardNameContainer}>*/}
-            {/*    <Text style={styles.cardTitle}>Daily Ayah</Text>*/}
-            {/*</View>*/}
             {isLoading ? (
                 <ActivityIndicator size='large' color={COLORS.primary}/>
             ) : error ? (
