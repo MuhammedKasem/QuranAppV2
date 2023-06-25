@@ -6,13 +6,12 @@ import styles from '../QuranList/QuranList.style'
 const QuranList = () => {
     const router = useRouter();
     const arabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
-
     const toArabicNumerals = (number) => {
         return [...number.toString()].map(digit => arabicNumerals[digit]).join('');
     }
 
     const handleSurahPress = (surah) => {
-        router.push({pathname: `/Surah/${surah.id}`, params: {id: surah.id}})
+        router.push({pathname: `/Surah/${surah.id}`, params: {id: surah.id, name: surah.transliteration}})
 
     }
 
