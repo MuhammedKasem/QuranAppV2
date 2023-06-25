@@ -20,6 +20,8 @@ const styles = StyleSheet.create({
         borderColor: COLORS.gray
     },
     surahName: {
+        alignSelf: "center",
+        width: "80%",
         flexDirection: "row",
         justifyContent: "space-between",
         color: COLORS.green
