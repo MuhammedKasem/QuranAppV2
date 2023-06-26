@@ -34,12 +34,15 @@ const QuranList = () => {
         </TouchableOpacity>
     );
     return (
+<View style={styles.quranListWrapper}>
+        <Text style={styles.headerText}>بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</Text>
         <View style={styles.container}>
             <FlatList data={englishChapters}
                       renderItem={renderItem}
                       showsVerticalScrollIndicator={false}
                       keyExtractor={(item) => item.id.toString()}/>
         </View>
+</View>
     )
 }
 

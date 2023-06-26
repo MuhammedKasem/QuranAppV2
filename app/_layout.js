@@ -5,7 +5,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import ScreenHeaderBtn from "../components/home/Buttons/ScreenHeaderBtn";
 import { Ionicons } from '@expo/vector-icons';
 
-import { COLORS, icons, images, SIZES} from '../constants';
+import {COLORS, FONT, icons, images, SIZES} from '../constants';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -30,7 +30,7 @@ const Layout = () => {
           <Stack.Screen name="(tabs)" options={{
                     headerStyle: { backgroundColor: COLORS.black },
                     headerShadowVisible: false,
-                    headerTitle: "",
+              headerTitle: "",
                     headerLeft: () => (
                         <ScreenHeaderBtn
                             iconName="menu-outline"

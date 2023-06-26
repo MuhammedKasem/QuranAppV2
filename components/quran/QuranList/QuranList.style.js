@@ -39,6 +39,17 @@ const styles = StyleSheet.create({
          fontFamily: FONT.kitabBold,
         fontSize: SIZES.xLarge,
         color: COLORS.green
+    },
+    headerText: {
+        fontFamily: FONT.kitabBold,
+        fontSize: SIZES.xLarge,
+        color: COLORS.green,
+        textAlign: "center"
+    },
+    quranListWrapper: {
+         flex: 1,
+         flexDirection: "column",
+        gap: 10,
     }
 
 })
