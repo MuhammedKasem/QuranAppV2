@@ -5,14 +5,15 @@ import {COLORS, FONT, SHADOWS, SIZES} from "../constants";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "space-between",
+        margin: SIZES.medium,
         alignItems: "center",
-        flexDirection: "row",
+        flexDirection: "column",
         padding: SIZES.medium,
         borderRadius: SIZES.small,
         backgroundColor: COLORS.lightGray,
         ...SHADOWS.medium,
         shadowColor: COLORS.white,
+        gap: 10,
     },
     optionName: {
         fontFamily: FONT.bold,
@@ -23,8 +24,18 @@ const styles = StyleSheet.create({
     },
     optionContainer: {
         flexDirection: "row",
+        width: "100%",
         justifyContent: "space-between",
         color: COLORS.green
+    },
+    optionPicker: {
+        width: "100%",
+    },
+    pickerName: {
+        fontFamily: FONT.bold,
+        fontSize: SIZES.large,
+        color: COLORS.green,
+
     }
 
 })
