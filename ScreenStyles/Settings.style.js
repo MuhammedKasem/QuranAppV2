@@ -21,6 +21,11 @@ const styles = StyleSheet.create({
         alignSelf: "center"
 
     },
+    optionContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        color: COLORS.green
+    }
 
 })
 

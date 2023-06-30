@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, FlatList, SafeAreaView, Text, View} from 'react-native'
+import React, {useEffect, useState, useRef} from 'react';
+import {ActivityIndicator, FlatList, SafeAreaView, Text, TouchableOpacity, View} from 'react-native'
 import {Stack, useLocalSearchParams} from "expo-router";
 import {Audio} from 'expo-av';
 import quranData from '../../data/quran_en.json';
@@ -12,7 +12,7 @@ const Surah = () => {
     const id = Number(idString);
     const arabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
 
-    const [sound, setSound] = useState(null);
+    const sound = useRef(null);
     const [surahData, setSurahData] = useState(null);
 
     const toArabicNumerals = (number) => {
@@ -39,37 +39,39 @@ const Surah = () => {
         setSurahData(surahDataFound);
     }, [id]);
 
-    async function stopSound() {
-        if (sound) {
-            await sound.stopAsync();
-            await sound.unloadAsync();
-            setSound(null);
+    async function playSound(uri) {
+        if (sound.current) {
+            await sound.current.unloadAsync();
+            const {sound: newSound} = await Audio.Sound.createAsync({uri});
+            sound.current = newSound;
+        } else {
+            const {sound: newSound} = await Audio.Sound.createAsync({uri});
+            sound.current = newSound;
         }
+        await sound.current.playAsync();
     }
 
-    async function playSound(uri) {
-        await stopSound();
-        const {sound} = await Audio.Sound.createAsync({uri});
-        setSound(sound);
-        await sound.playAsync();
-    }
+
 
     const VerseItem = ({verse}) => {
         return (
             <View style={styles.surah}>
-                <Text
-                    style={styles.arabicName}
+                <TouchableOpacity
                     onPress={() =>
                         playSound(
                             `https://cdn.islamic.network/quran/audio/128/ar.mahermuaiqly/${verse.global_verse_number}.mp3`
                         )
-                    }
-                >
-                    {`(${toArabicNumerals(verse.id)}) - ${verse.text}`}
-                </Text>
-                <Text style={styles.englishTranslation}>
-                    {`${verse.id}. ${verse.translation}`}
-                </Text>
+                    }>
+                    <Text
+                        style={styles.arabicName}
+                    >
+                        {`(${toArabicNumerals(verse.id)}) - ${verse.text}`}
+                    </Text>
+                    <Text style={styles.englishTranslation}>
+                        {`${verse.id}. ${verse.translation}`}
+                    </Text>
+                </TouchableOpacity>
+
             </View>
         );
     };
@@ -77,8 +79,8 @@ const Surah = () => {
     const renderItem = ({item: verse}) => <VerseItem verse={verse}/>;
 
     useEffect(() => {
-        return sound ? () => sound.unloadAsync() : undefined;
-    }, [sound]);
+        return sound.current ? () => sound.current.unloadAsync() : undefined;
+    }, []);
 
     if (!surahData) {
         return <ActivityIndicator/>;
@@ -95,8 +97,11 @@ const Surah = () => {
                     headerTitleStyle: {color: COLORS.green, fontFamily: FONT.bold, fontSize: SIZES.large}
                 }}
             />
-            <View style={{flex: 1, padding: SIZES.medium,}}>
-                <View style={styles.container}>
+
+            <View style={styles.container}>
+                <View style={{flex: 1, padding: SIZES.medium,}}>
+
+
                     <FlatList
                         data={surahData.verses}
                         renderItem={renderItem}
@@ -107,6 +112,6 @@ const Surah = () => {
             </View>
         </SafeAreaView>
     )
-}
 
+}
 export default Surah;
