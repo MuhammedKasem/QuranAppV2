@@ -1,10 +1,12 @@
 import React, {useEffect, useState, useRef} from 'react';
-import {ActivityIndicator, FlatList, SafeAreaView, Text, TouchableOpacity, View} from 'react-native'
+import {ActivityIndicator, FlatList, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 import {Stack, useLocalSearchParams} from "expo-router";
 import {Audio} from 'expo-av';
 import quranData from '../../data/quran_en.json';
 import styles from '../Surah/Surah.style'
 import {COLORS, FONT, SIZES} from '../../constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Surah = () => {
     const params = useLocalSearchParams();
@@ -12,7 +14,8 @@ const Surah = () => {
     const id = Number(idString);
     const arabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
 
-    const sound = useRef(null);
+    const [sound, setSound] = useState(new Audio.Sound());
+    const [reciter, setReciter] = useState(null);
     const [surahData, setSurahData] = useState(null);
 
     const toArabicNumerals = (number) => {
@@ -35,23 +38,30 @@ const Surah = () => {
     );
 
     useEffect(() => {
+        const getReciter = async () => {
+            const settingsString = await AsyncStorage.getItem('SETTINGS');
+            if (settingsString) {
+                const settings = JSON.parse(settingsString);
+                setReciter(settings.reciter);
+            }
+        }
+
+        getReciter();
         const surahDataFound = quranData.find((surah) => surah.id === id);
         setSurahData(surahDataFound);
     }, [id]);
 
     async function playSound(uri) {
-        if (sound.current) {
-            await sound.current.unloadAsync();
-            const {sound: newSound} = await Audio.Sound.createAsync({uri});
-            sound.current = newSound;
-        } else {
-            const {sound: newSound} = await Audio.Sound.createAsync({uri});
-            sound.current = newSound;
+        try {
+            if (sound._loaded) {
+                await sound.unloadAsync();
+            }
+            await sound.loadAsync({ uri });
+            await sound.playAsync();
+        } catch (error) {
+            console.log(error);
         }
-        await sound.current.playAsync();
     }
-
-
 
     const VerseItem = ({verse}) => {
         return (
@@ -59,7 +69,7 @@ const Surah = () => {
                 <TouchableOpacity
                     onPress={() =>
                         playSound(
-                            `https://cdn.islamic.network/quran/audio/128/ar.mahermuaiqly/${verse.global_verse_number}.mp3`
+                            `https://cdn.islamic.network/quran/audio/128/${reciter}/${verse.global_verse_number}.mp3`
                         )
                     }>
                     <Text
@@ -78,13 +88,10 @@ const Surah = () => {
 
     const renderItem = ({item: verse}) => <VerseItem verse={verse}/>;
 
-    useEffect(() => {
-        return sound.current ? () => sound.current.unloadAsync() : undefined;
-    }, []);
-
     if (!surahData) {
         return <ActivityIndicator/>;
     }
+
 
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: COLORS.black}}>
