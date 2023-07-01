@@ -35,7 +35,9 @@ const QuranList = () => {
     );
     return (
 <View style={styles.quranListWrapper}>
-        <Text style={styles.headerText}>بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</Text>
+    <Text style={styles.headerText}>{'\uFDFD'}</Text>
+
+    <Text style={styles.headerText}>In the name of Allah, the Most Gracious, the Most Merciful</Text>
         <View style={styles.container}>
             <FlatList data={englishChapters}
                       renderItem={renderItem}
