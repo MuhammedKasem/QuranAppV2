@@ -1,7 +1,8 @@
-import { View, Text, FlatList, TouchableOpacity} from 'react-native';
+import { View, Image, Text, FlatList, TouchableOpacity} from 'react-native';
 import englishChapters from '../../../data/englishChapters.json';
 import {useRouter} from "expo-router";
 import styles from '../QuranList/QuranList.style'
+import Bismillah from '../../../assets/images/bismillah.svg';
 
 const QuranList = () => {
     const router = useRouter();
@@ -35,10 +36,10 @@ const QuranList = () => {
     );
     return (
 <View style={styles.quranListWrapper}>
-    <Text style={styles.headerText}>{'\uFDFD'}</Text>
-
+    <Bismillah style={styles.Bismillah} width="100%" height={85}/>
     <Text style={styles.headerText}>In the name of Allah, the Most Gracious, the Most Merciful</Text>
         <View style={styles.container}>
+
             <FlatList data={englishChapters}
                       renderItem={renderItem}
                       showsVerticalScrollIndicator={false}

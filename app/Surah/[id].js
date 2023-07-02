@@ -16,6 +16,7 @@ const Surah = () => {
 
     const [sound, setSound] = useState(new Audio.Sound());
     const [reciter, setReciter] = useState(null);
+    const [arabicShown, setArabicShown] = useState(null);
     const [surahData, setSurahData] = useState(null);
 
     const toArabicNumerals = (number) => {
@@ -38,15 +39,16 @@ const Surah = () => {
     );
 
     useEffect(() => {
-        const getReciter = async () => {
+        const fetchSettings = async () => {
             const settingsString = await AsyncStorage.getItem('SETTINGS');
             if (settingsString) {
                 const settings = JSON.parse(settingsString);
                 setReciter(settings.reciter);
+                setArabicShown(settings.showArabic);
             }
         }
 
-        getReciter();
+        fetchSettings();
         const surahDataFound = quranData.find((surah) => surah.id === id);
         setSurahData(surahDataFound);
     }, [id]);
@@ -75,7 +77,8 @@ const Surah = () => {
                     <Text
                         style={styles.arabicName}
                     >
-                        {`(${toArabicNumerals(verse.id)}) - ${verse.text}`}
+                        {arabicShown ? `${toArabicNumerals(verse.id)} - ${verse.text}` : null}
+
                     </Text>
                     <Text style={styles.englishTranslation}>
                         {`${verse.id}. ${verse.translation}`}

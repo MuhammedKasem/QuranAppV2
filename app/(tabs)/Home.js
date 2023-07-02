@@ -41,9 +41,6 @@ const Home = () => {
     const prayerTimes = coordinates ? new PrayerTimes(coordinates, date, params) : null;
     const sunnahTimes = prayerTimes ? new SunnahTimes(prayerTimes) : null;
 
-    if(!prayerTimes || !sunnahTimes) {
-        return null;
-    }
 
     function prayerName(prayer) {
         if (prayer === Prayer.Fajr) {
@@ -79,7 +76,7 @@ const Home = () => {
                 {prayerTimes ?
                     <CurrentPrayer prayerName={prayerName} prayerTimes={prayerTimes} date={date}
                                    sunnahTimes={sunnahTimes} userTimezone={userTimezone}/> :
-                    <ActivityIndicator size='large' color={COLORS.primary}/>
+                    <ActivityIndicator size='large' color={COLORS.green}/>
                 }
             </View>
             </ScrollView>
