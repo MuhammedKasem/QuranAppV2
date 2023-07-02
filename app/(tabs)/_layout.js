@@ -2,10 +2,13 @@ import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
 import { COLORS, icons, images, SIZES} from './../../constants';
+import store from '../../Redux/store';
+import { Provider } from 'react-redux';
 import {BlurView} from "expo-blur";
 
 export default () => {
     return (
+        <Provider store={store}>
         <Tabs
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color }) => {
@@ -19,6 +22,8 @@ export default () => {
                         iconName = focused ? 'book' : 'book-outline';
                     } else if (route.name === 'Settings') {
                         iconName = focused ? 'settings' : 'settings-outline';
+                    } else if (route.name === 'Memorize') {
+                        iconName = focused ? 'bookmarks' : 'bookmarks-outline';
                     }
 
                     // Add your own size here
@@ -44,6 +49,12 @@ export default () => {
                 name="Settings"
                 options={{ headerShown: false }}
             />
+            <Tabs.Screen
+                name="Memorize"
+                options={{ headerShown: false }}
+
+            />
         </Tabs>
+        </Provider>
     )
 }

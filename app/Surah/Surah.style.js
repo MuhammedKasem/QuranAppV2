@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "row",
-        padding: SIZES.medium,
+        margin: SIZES.large,
         borderRadius: SIZES.small,
         backgroundColor: COLORS.lightGray,
         ...SHADOWS.medium,

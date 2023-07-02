@@ -3,6 +3,7 @@ import englishChapters from '../../../data/englishChapters.json';
 import {useRouter} from "expo-router";
 import styles from '../QuranList/QuranList.style'
 import Bismillah from '../../../assets/images/bismillah.svg';
+import {COLORS} from "../../../constants";
 
 const QuranList = () => {
     const router = useRouter();
@@ -36,7 +37,7 @@ const QuranList = () => {
     );
     return (
 <View style={styles.quranListWrapper}>
-    <Bismillah style={styles.Bismillah} width="100%" height={85}/>
+    <Bismillah style={styles.Bismillah} width="100%" height={85} fill={COLORS.green}/>
     <Text style={styles.headerText}>In the name of Allah, the Most Gracious, the Most Merciful</Text>
         <View style={styles.container}>
 

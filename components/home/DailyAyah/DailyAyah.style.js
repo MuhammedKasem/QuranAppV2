@@ -4,10 +4,10 @@ import {COLORS, FONT, SHADOWS, SIZES} from "../../../constants";
 
 const styles = StyleSheet.create({
     container: {
-        justifyContent: "space-between",
-        alignItems: "center",
-        flexDirection: "column",
+        flex: 1,
         width: "100%",
+        justifyContent: "space-between",
+        flexDirection: "column",
         padding: SIZES.small,
         gap: 10,
         borderRadius: SIZES.small,
