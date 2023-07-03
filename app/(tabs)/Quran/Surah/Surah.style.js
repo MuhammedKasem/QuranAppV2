@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
 
     },
     arabicName: {
-        fontFamily: FONT.kitabBold,
-        fontSize: SIZES.xLarge,
+        fontFamily: FONT.uthmani,
+        fontSize: SIZES.xxLarge,
         color: COLORS.green,
         textAlign: "right"
     },

@@ -15,7 +15,8 @@ const Layout = () => {
         DMMedium: require('../assets/fonts/DMSans-Medium.ttf'),
         DMRegular: require('../assets/fonts/DMSans-Regular.ttf'),
         Kitab: require('../assets/fonts/Kitab-Regular.ttf'),
-        KitabBold: require('../assets/fonts/Kitab-Bold.ttf')
+        KitabBold: require('../assets/fonts/Kitab-Bold.ttf'),
+        uthmani: require('../assets/fonts/uthmaniRegular.otf')
     })
 
     const onLayoutRootView = useCallback(async () => {
