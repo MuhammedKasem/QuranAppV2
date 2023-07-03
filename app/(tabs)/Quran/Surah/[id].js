@@ -17,6 +17,7 @@ const Surah = () => {
     const id = Number(idString);
     const arabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
 
+    const showEnglish = useSelector((state) => state.settings.showEnglish);
     const showArabic = useSelector((state) => state.settings.showArabic);
     const [selectedAyah, setSelectedAyah] = useState(null);
     const reciter = useSelector((state) => state.settings.reciter);
@@ -28,6 +29,7 @@ const Surah = () => {
     const toArabicNumerals = (number) => {
         return [...number.toString()].map(digit => arabicNumerals[digit]).join('');
     }
+
 
 
     const customHeader = () => (
@@ -176,7 +178,7 @@ const Surah = () => {
                         {showArabic ? `${toArabicNumerals(verse.id)} - ${verse.text}` : null}
                     </Text>
                     <Text style={styles.englishTranslation}>
-                        {`${verse.id}. ${verse.translation}`}
+                        {showEnglish ? `${verse.id}. ${verse.translation}`: null}
                     </Text>
                 </TouchableOpacity>
             </Animated.View>

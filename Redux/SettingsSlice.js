@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     darkMode: false,
     showArabic: true,
+    showEnglish: true,
     reciter: 'ar.mahermuaiqly',
 };
 
@@ -18,6 +19,9 @@ const settingsSlice = createSlice({
         toggleShowArabic(state) {
             state.showArabic = !state.showArabic;
         },
+        toggleShowEnglish(state) {
+            state.showEnglish = !state.showEnglish;
+        },
         setReciter(state, action) {
             state.reciter = action.payload;
         },
@@ -25,7 +29,7 @@ const settingsSlice = createSlice({
 });
 
 // Export the actions
-export const { toggleDarkMode, toggleShowArabic, setReciter } = settingsSlice.actions;
+export const { toggleDarkMode, toggleShowArabic, toggleShowEnglish, setReciter } = settingsSlice.actions;
 
 // Export the reducer
 export default settingsSlice.reducer;

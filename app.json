@@ -13,6 +13,9 @@
     },
     "ios": {
       "bundleIdentifier": "com.wryskie.QuranAppV2"
+    },
+    "android": {
+      "package": "com.wryskie.QuranAppV2"
     }
   }
 }
