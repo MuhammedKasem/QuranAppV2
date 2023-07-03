@@ -6,6 +6,8 @@ import {persistor, store} from '../../Redux/store';
 import { Provider } from 'react-redux';
 import {BlurView} from "expo-blur";
 import {PersistGate} from "redux-persist/integration/react";
+import ScreenHeaderBtn from "../../components/home/Buttons/ScreenHeaderBtn";
+import {View} from "react-native";
 
 export default () => {
     return (
@@ -41,7 +43,27 @@ export default () => {
         >
             <Tabs.Screen
                 name="Home"
-                options={{ headerShown: false }}
+                options={{
+                    headerStyle: { backgroundColor: COLORS.black },
+                    headerShadowVisible: false,
+                    headerTitle: "",
+                    headerLeft: () => (
+                        <View style={{ paddingLeft: SIZES.medium }}>
+                            <ScreenHeaderBtn
+                                iconName="menu-outline"
+                                color={COLORS.lightWhite}
+                            />
+                        </View>
+                    ),
+                    headerRight: () => (
+                        <View style={{ paddingRight: SIZES.medium }}>
+                            <ScreenHeaderBtn
+                                iconName="mail-outline"
+                                color={COLORS.lightWhite}
+                            />
+                        </View>
+                    ),
+                }}
             />
             <Tabs.Screen
                 name="Quran"

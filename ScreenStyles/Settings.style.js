@@ -36,6 +36,12 @@ const styles = StyleSheet.create({
         fontSize: SIZES.large,
         color: COLORS.green,
 
+    },
+    settingsTxt: {
+        fontFamily: FONT.bold,
+        fontSize: SIZES.xxLarge,
+        color: COLORS.lightWhite,
+        padding: SIZES.medium,
     }
 
 })

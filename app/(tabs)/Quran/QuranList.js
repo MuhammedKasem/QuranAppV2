@@ -14,7 +14,6 @@ const QuranList = () => {
     }
 
     const handleSurahPress = (surah) => {
-        console.log(surah.id);
         router.push({pathname: `/(tabs)/Quran/Surah/${surah.id}`, params: {id: surah.id, name: surah.transliteration}})
 
     }

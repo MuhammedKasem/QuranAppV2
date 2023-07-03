@@ -28,21 +28,8 @@ const Layout = () => {
     return (
       <Stack onLayout={onLayoutRootView}>
           <Stack.Screen name="(tabs)" options={{
-                    headerStyle: { backgroundColor: COLORS.black },
-                    headerShadowVisible: false,
-              headerTitle: "",
-                    headerLeft: () => (
-                        <ScreenHeaderBtn
-                            iconName="menu-outline"
-                            color={COLORS.lightWhite}
-                        />
-                    ),
-                    headerRight: () => (
-                        <ScreenHeaderBtn
-                            iconName="mail-outline"
-                            color={COLORS.lightWhite}
-                        />
-                    ),
+              headerShown: false,
+
                 }} />
       </Stack>
     )

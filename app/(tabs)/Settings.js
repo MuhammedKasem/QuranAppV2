@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Switch, Slider, Button, StyleSheet } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {View, Text, Switch, SafeAreaView} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import { useSelector, useDispatch } from 'react-redux';
 import {toggleDarkMode,  toggleShowArabic, setReciter} from '../../Redux/SettingsSlice';
+import MultiSlider from '@ptomasroos/react-native-multi-slider';
+
 
 
 import styles from '../../ScreenStyles/Settings.style';
@@ -25,7 +26,6 @@ const Settings = () => {
 
     const handleToggleShowArabic = () => {
         dispatch(toggleShowArabic());
-        console.log(store.getState()); // Log the state to the console
     }
     const handleChangeReciter = (newReciter) => {
         dispatch(setReciter(newReciter));
@@ -35,7 +35,10 @@ const Settings = () => {
 
 
     return (
-        <View style={{ flex: 1, backgroundColor: COLORS.black}}>
+
+            <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.black}}>
+                <Text style={styles.settingsTxt}>Settings</Text>
+
             <View style={styles.container}>
                 <View style={styles.optionContainer}>
                     <Text style={styles.optionName}>Dark Mode</Text>
@@ -58,14 +61,34 @@ const Settings = () => {
 
                 <View style={styles.optionContainer}>
                     <Text style={styles.optionName}>Font Size</Text>
-                    <Slider style={{width: 200, height: 40}}
-                            value={fontSize}
-                            onValueChange={(value) => {
+                    <View style={{ marginHorizontal: 20 }}>
+                        <MultiSlider
+                            values={[fontSize]}
+                            sliderLength={220}
+                            onValuesChange={() => {}}
+                            min={10}
+                            max={32}
+                            step={2}
+                            optionsArray={[ 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]}
+                            containerStyle={{ height: 40 }}
+                            trackStyle={{
+                                height: 10,
+                                backgroundColor: COLORS.lightWhite,
                             }}
-                            minimumValue={10}
-                            maximumValue={30}
-                            step={1}
-                    />
+                            selectedStyle={{
+                                backgroundColor: 'black',
+                            }}
+                            markerStyle={{
+                                height: 30,
+                                width: 30,
+                                borderRadius: 20,
+                                backgroundColor: COLORS.green,
+                            }}
+                            pressedMarkerStyle={{
+                                backgroundColor: '#D3D3D3',
+                            }}
+                        />
+                    </View>
                 </View>
                 <View style={styles.optionPicker}>
                     <Text style={styles.pickerName}>Reciter</Text>
@@ -82,7 +105,7 @@ const Settings = () => {
                     </Picker>
                 </View>
             </View>
-        </View>
+        </SafeAreaView>
     );
 
 };
