@@ -2,10 +2,11 @@ import React, {useEffect, useState, useRef} from 'react';
 import {ActivityIndicator, FlatList, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 import {Stack, useLocalSearchParams} from "expo-router";
 import {Audio} from 'expo-av';
-import quranData from '../../data/quran_en.json';
-import styles from '../Surah/Surah.style'
-import {COLORS, FONT, SIZES} from '../../constants';
+import quranData from '../../../../data/quran_en.json';
+import styles from '../Surah.style'
+import {COLORS, FONT, SIZES} from '../../../../constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useSelector} from "react-redux";
 
 
 const Surah = () => {
@@ -14,14 +15,18 @@ const Surah = () => {
     const id = Number(idString);
     const arabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
 
+    const showArabic = useSelector((state) => state.settings.showArabic);
+    const reciter = useSelector((state) => state.settings.reciter);
     const [sound, setSound] = useState(new Audio.Sound());
-    const [reciter, setReciter] = useState(null);
-    const [arabicShown, setArabicShown] = useState(null);
     const [surahData, setSurahData] = useState(null);
 
     const toArabicNumerals = (number) => {
         return [...number.toString()].map(digit => arabicNumerals[digit]).join('');
     }
+
+    AsyncStorage.getItem('persist:root').then((value) => {
+        console.log('Persisted state:', value);
+    });
 
     const customHeader = () => (
         <View style={styles.surahName}>
@@ -39,16 +44,6 @@ const Surah = () => {
     );
 
     useEffect(() => {
-        const fetchSettings = async () => {
-            const settingsString = await AsyncStorage.getItem('SETTINGS');
-            if (settingsString) {
-                const settings = JSON.parse(settingsString);
-                setReciter(settings.reciter);
-                setArabicShown(settings.showArabic);
-            }
-        }
-
-        fetchSettings();
         const surahDataFound = quranData.find((surah) => surah.id === id);
         setSurahData(surahDataFound);
     }, [id]);
@@ -77,7 +72,7 @@ const Surah = () => {
                     <Text
                         style={styles.arabicName}
                     >
-                        {arabicShown ? `${toArabicNumerals(verse.id)} - ${verse.text}` : null}
+                        {showArabic ? `${toArabicNumerals(verse.id)} - ${verse.text}` : null}
 
                     </Text>
                     <Text style={styles.englishTranslation}>

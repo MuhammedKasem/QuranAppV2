@@ -1,9 +1,10 @@
-import { View, Image, Text, FlatList, TouchableOpacity} from 'react-native';
+import { View, SafeAreaView, Image, Text, FlatList, TouchableOpacity} from 'react-native';
 import englishChapters from '../../../data/englishChapters.json';
 import {useRouter} from "expo-router";
-import styles from '../QuranList/QuranList.style'
+import styles from './QuranList.style'
 import Bismillah from '../../../assets/images/bismillah.svg';
 import {COLORS} from "../../../constants";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const QuranList = () => {
     const router = useRouter();
@@ -13,9 +14,11 @@ const QuranList = () => {
     }
 
     const handleSurahPress = (surah) => {
-        router.push({pathname: `/Surah/${surah.id}`, params: {id: surah.id, name: surah.transliteration}})
+        console.log(surah.id);
+        router.push({pathname: `/(tabs)/Quran/Surah/${surah.id}`, params: {id: surah.id, name: surah.transliteration}})
 
     }
+
 
 
     const renderItem = ({ item: surah }) => (
@@ -36,6 +39,9 @@ const QuranList = () => {
         </TouchableOpacity>
     );
     return (
+
+
+        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.black}}>
 <View style={styles.quranListWrapper}>
     <Bismillah style={styles.Bismillah} width="100%" height={85} fill={COLORS.green}/>
     <Text style={styles.headerText}>In the name of Allah, the Most Gracious, the Most Merciful</Text>
@@ -47,6 +53,7 @@ const QuranList = () => {
                       keyExtractor={(item) => item.id.toString()}/>
         </View>
 </View>
+        </SafeAreaView>
     )
 }
 

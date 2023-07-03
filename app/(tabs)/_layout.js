@@ -2,13 +2,15 @@ import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
 import { COLORS, icons, images, SIZES} from './../../constants';
-import store from '../../Redux/store';
+import {persistor, store} from '../../Redux/store';
 import { Provider } from 'react-redux';
 import {BlurView} from "expo-blur";
+import {PersistGate} from "redux-persist/integration/react";
 
 export default () => {
     return (
         <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
         <Tabs
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color }) => {
@@ -55,6 +57,7 @@ export default () => {
 
             />
         </Tabs>
+            </PersistGate>
         </Provider>
     )
 }

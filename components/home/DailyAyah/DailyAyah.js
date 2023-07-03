@@ -5,13 +5,13 @@ import useFetch from '../../../hook/useFetch'
 import {COLORS} from '../../../constants';
 import {Ionicons} from "@expo/vector-icons";
 import { Audio } from 'expo-av';
-
+import { useSelector } from "react-redux";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const DailyAyah = () => {
 
-    const [reciter, setReciter] = useState(null);
+    const reciter = useSelector((state) => state.settings.reciter);
     const [randNumber, setRandNumber] = useState(Math.floor(Math.random() * 6236) + 1);
     const {data, error, isLoading} = useFetch(`ayah/${randNumber}/en.sahih`);
     const {data: secondData, error: secondError, isLoading: secondIsLoading} = useFetch(`ayah/${randNumber}`);
@@ -28,8 +28,6 @@ const DailyAyah = () => {
     }
 
 
-    console.log(data)
-    console.log(secondData)
 
     const playSound = async () => {
         const { sound } = await Audio.Sound.createAsync(
@@ -41,21 +39,12 @@ const DailyAyah = () => {
     }
 
     useEffect(() => {
-        const getReciter = async () => {
-            const settingsString = await AsyncStorage.getItem('SETTINGS');
-            if (settingsString) {
-                const settings = JSON.parse(settingsString);
-                setReciter(settings.reciter);
-            }
-        }
-
-        getReciter();
         return sound
             ? () => {
                 sound.unloadAsync();
             }
             : undefined;
-    }, [sound, reciter]);
+    }, [sound]);
 
 
 

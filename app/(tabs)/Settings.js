@@ -2,54 +2,37 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Switch, Slider, Button, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Picker} from '@react-native-picker/picker';
+import { useSelector, useDispatch } from 'react-redux';
+import {toggleDarkMode,  toggleShowArabic, setReciter} from '../../Redux/SettingsSlice';
+
 
 import styles from '../../ScreenStyles/Settings.style';
 import {COLORS, FONT} from "../../constants";
+import {store} from "../../Redux/store";
 
 const Settings = () => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
-    const [reciter, setReciter] = useState("ar.mahermuaiqly");
-    const [fontSize, setFontSize] = useState(14);
-    const [showArabic, setShowArabic] = useState(true);
 
-    const initialSettings = {
-        isDarkMode: false,
-        reciter: "ar.mahermuaiqly",
-        fontSize: 14,
-        showArabic: true
+    const darkMode = useSelector((state) => state.settings.darkMode);
+    const fontSize = useSelector((state) => state.settings.fontSize);
+    const showArabic = useSelector((state) => state.settings.showArabic);
+    const reciter = useSelector((state) => state.settings.reciter);
+
+    const dispatch = useDispatch();
+
+    const handleToggleDarkMode = () => {
+        dispatch(toggleDarkMode());
     };
 
-    const saveSettings = async (newSettings) => {
-        try {
-            await AsyncStorage.setItem('SETTINGS', JSON.stringify(newSettings));
-        } catch (error) {
-            // saving error
-            console.log(error);
-        }
-    };
+    const handleToggleShowArabic = () => {
+        dispatch(toggleShowArabic());
+        console.log(store.getState()); // Log the state to the console
+    }
+    const handleChangeReciter = (newReciter) => {
+        dispatch(setReciter(newReciter));
+    }
 
-    const loadSettings = async () => {
-        try {
-            let settings = await AsyncStorage.getItem('SETTINGS');
-            if (settings !== null) {
-                settings = JSON.parse(settings);
-            } else {
-                settings = initialSettings;
-                await AsyncStorage.setItem('SETTINGS', JSON.stringify(initialSettings));
-            }
-            setIsDarkMode(settings.isDarkMode);
-            setReciter(settings.reciter);
-            setFontSize(settings.fontSize);
-            setShowArabic(settings.showArabic);
-        } catch (error) {
-            // loading error
-            console.log(error);
-        }
-    };
 
-    useEffect(() => {
-        loadSettings();
-    }, []);
+
 
     return (
         <View style={{ flex: 1, backgroundColor: COLORS.black}}>
@@ -57,10 +40,9 @@ const Settings = () => {
                 <View style={styles.optionContainer}>
                     <Text style={styles.optionName}>Dark Mode</Text>
                     <Switch
-                        value={isDarkMode}
+                        value={darkMode}
                         onValueChange={(value) => {
-                            setIsDarkMode(value);
-                            saveSettings({ ...initialSettings, isDarkMode: value });
+                            handleToggleDarkMode();
                         }}
                     />
                 </View>
@@ -69,8 +51,7 @@ const Settings = () => {
                     <Switch
                         value={showArabic}
                         onValueChange={(value) => {
-                            setShowArabic(value);
-                            saveSettings({ ...initialSettings, showArabic: value });
+                            handleToggleShowArabic();
                         }}
                     />
                 </View>
@@ -80,8 +61,6 @@ const Settings = () => {
                     <Slider style={{width: 200, height: 40}}
                             value={fontSize}
                             onValueChange={(value) => {
-                                setFontSize(value);
-                                saveSettings({ ...initialSettings, fontSize: value });
                             }}
                             minimumValue={10}
                             maximumValue={30}
@@ -94,8 +73,7 @@ const Settings = () => {
                         selectedValue={reciter}
                         style={{ color: 'red', fontSize: 18 }}
                         onValueChange={(itemValue, itemIndex) => {
-                            setReciter(itemValue);
-                            saveSettings({ ...initialSettings, reciter: itemValue });
+                            handleChangeReciter(itemValue)
                         }}
                     >
                         <Picker.Item label="Maher Muaqily" color={COLORS.green} value="ar.mahermuaiqly" />
